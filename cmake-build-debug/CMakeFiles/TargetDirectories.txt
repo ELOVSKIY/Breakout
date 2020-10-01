@@ -1,0 +1,3 @@
+C:/Users/Helicoptera/Desktop/Course-5/Breakout/cmake-build-debug/CMakeFiles/Breakout.dir
+C:/Users/Helicoptera/Desktop/Course-5/Breakout/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Helicoptera/Desktop/Course-5/Breakout/cmake-build-debug/CMakeFiles/rebuild_cache.dir

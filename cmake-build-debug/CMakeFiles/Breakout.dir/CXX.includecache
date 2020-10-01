@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Helicoptera/Desktop/Course-5/Breakout/main.cpp
+windows.h
+-
+windowsx.h
+-
+new
+-
+iostream
+-
+fstream
+-
+string
+-
+vector
+-
+sstream
+-
+algorithm
+-
+iterator
+-
+
