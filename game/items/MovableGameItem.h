@@ -9,21 +9,38 @@
 #include <set>
 
 enum Direction {
-    TOP = 1,
-    RIGHT = 2,
-    BOTTOM = -1,
-    LEFT = -2
+    POSITIVE = 1,
+    NEGATIVE = -1
 };
 
+#define POSITIVE_DIRECTION 1
+#define NEGATIVE_DIRECTION -1
+
+typedef struct Velocity {
+    char direction;
+    measure value;
+} Velocity;
+
+typedef struct Vector {
+    Velocity xVector;
+    Velocity yVector;
+} Vector;
+
+
 class MovableGameItem : public GameItem {
-protected:
-    int speed;
+    measure speed;
 public:
-    MovableGameItem(int left, int top, int width, int height, int speed);
+    MovableGameItem(int left,
+                    int top,
+                    int width,
+                    int height,
+                    int speed);
 
-    virtual void move();
+    measure GetSpeed();
 
-    virtual void move(std::set<Direction> directions);
+    virtual void Move();
+
+    virtual void Move(const Vector vector);
 };
 
 

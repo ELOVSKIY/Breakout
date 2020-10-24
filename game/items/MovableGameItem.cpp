@@ -6,28 +6,21 @@
 
 MovableGameItem::MovableGameItem(int left, int top, int width, int height, int speed) :
         GameItem(left, top, width, height) {
+    this->speed = speed;
 }
 
 
-void MovableGameItem::move(std::set<Direction> directions) {
-    for (auto direction : directions) {
-        switch (direction) {
-            case TOP:
-                this->top - speed;
-                break;
-            case RIGHT:
-                this->left + speed;
-                break;
-            case LEFT:
-                this->left - speed;
-                break;
-                this->top + speed;
-            case BOTTOM:
-                break;
-        }
-    }
+void MovableGameItem::Move(const Vector vector) {
+    const measure top = GetTop() + (vector.yVector.value * vector.yVector.direction);
+    const measure left = GetLeft() + (vector.xVector.value * vector.xVector.direction);
+    SetTop(top);
+    SetLeft(left);
 }
 
-void MovableGameItem::move() {
+void MovableGameItem::Move() {
     // do nothing
+}
+
+measure MovableGameItem::GetSpeed() {
+    return speed;
 }

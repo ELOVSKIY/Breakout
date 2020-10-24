@@ -8,17 +8,51 @@
 
 #include <Windows.h>
 
+typedef float measure;
+#define MEASURE_MAX INFINITY
+
+typedef struct Border {
+    measure top;
+    measure right;
+    measure bottom;
+    measure left;
+} Border;
+
 class GameItem {
 public:
     virtual void Draw(HDC &hdc);
-    GameItem(int left, int top, int width, int height);
+
+    GameItem(int left,
+             int top,
+             int width,
+             int height);
+
+    measure GetWidth() const;
+
+    measure GetHeight() const;
+
+    measure GetLeft() const;
+
+    measure GetTop() const;
+
+    measure GetRight() const;
+
+    measure GetBottom() const;
+
+    Border GetBorder() const;
+
 protected:
-    int width;
-    int height;
-    int left;
-    int top;
-    int right;
-    int bottom;
+    void SetLeft(int left);
+
+    void SetTop(int top);
+
+private:
+    measure width;
+    measure height;
+    measure left;
+    measure top;
+    measure right;
+    measure bottom;
 };
 
 
