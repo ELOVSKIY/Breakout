@@ -14,14 +14,43 @@ using namespace std;
 
 class Game {
 private:
+    HWND hWnd;
+
+    measure width;
+    measure height;
+
+    bool active;
+
     Plate *plate;
-    list<Brick*> *bricks;
+    list<Brick *> *bricks;
     Ball *ball;
+    list<GameItem *> *gameItems;
 public:
-    Game(int width, int height);
-    void Initialize();
-    void Draw(HDC wHdc);
-    void GetInput(UINT uMsg,
+    Game(HWND hWnd,
+         const int width,
+         const int height);
+
+//    void Initialize();
+
+    void Click();
+
+    measure GetMaxAvailableDistance(const GameItem *gameItem,
+                                    const Vector vector);
+
+    measure GetMaxAvailableDistance(const GameItem *gameItem,
+                                    const Vector vector,
+                                    const measure maxAvailableDistance);
+
+    measure GetMinGameItemMeasure();
+
+    bool IsBetweenHorizontalEdge(const measure yPos);
+
+    bool IsBetweenVerticalEdge(const measure xPos);
+
+    void Draw(HWND hWnd);
+
+    void GetInput(HWND hWnd,
+                  UINT uMsg,
                   WPARAM wParam,
                   LPARAM lParam);
 };
