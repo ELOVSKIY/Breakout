@@ -11,7 +11,6 @@
 #include "game/Game.h"
 
 using namespace std;
-
 struct StateInfo {
     Game *game;
     int clientWidth, clientHeight;
@@ -25,6 +24,10 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow) {
 
     const wchar_t CLASS_NAME[] = L"Main Break Out Class";
+
+//    Gdiplus::GdiplusStartupInput gdiplusStartupInput;
+//    ULONG_PTR           gdiplusToken;
+//    GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
     WNDCLASS wc = {};
 
@@ -67,6 +70,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
         DispatchMessage(&msg);
     }
 
+//    Gdiplus::GdiplusShutdown(gdiplusToken);
     return 0;
 }
 
@@ -78,7 +82,7 @@ inline StateInfo *GetAppState(
 }
 
 LRESULT CALLBACK WindowProc(
-        HWND hwnd,
+        HWND hWnd,
         UINT uMsg,
         WPARAM wParam,
         LPARAM lParam) {
@@ -86,46 +90,43 @@ LRESULT CALLBACK WindowProc(
     if (uMsg == WM_CREATE) {
         CREATESTRUCT *pCreate = reinterpret_cast<CREATESTRUCT *>(lParam);
         pState = reinterpret_cast<StateInfo *>(pCreate->lpCreateParams);
-        SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR) pState);
+        SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR) pState);
 
         RECT winRect;
 
-        if (GetClientRect(hwnd, &winRect)) {
+        if (GetClientRect(hWnd, &winRect)) {
             pState->clientWidth = winRect.right - winRect.left;
             pState->clientHeight = winRect.bottom - winRect.top;
         }
 
     } else {
-        pState = GetAppState(hwnd);
+        pState = GetAppState(hWnd);
     }
-//    pState->game->GetInput(uMsg, wParam, lParam);
+
+    if (pState && pState->game) {
+        pState->game->GetInput(hWnd, uMsg, lParam, wParam);
+    }
     switch (uMsg) {
+
         case WM_DESTROY:
             PostQuitMessage(0);
             return 0;
 
         case WM_PAINT: {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hwnd, &ps);
 
-            pState->game->Draw(hdc);
-//            FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
-//            HDC memHdc = CreateCompatibleDC(hdc);
-//            HBRUSH hbrush = CreateSolidBrush(RGB(200,200,200));
-//            SelectObject(hdc,hbrush);
-//            Rectangle(hdc, 200, 200, 500, 500);
-//            DeleteObject(hbrush);
 
-            EndPaint(hwnd, &ps);
+            pState->game->Draw(hWnd);
+
+
         }
             return 0;
 
         case WM_SIZE:
             pState->clientWidth = LOWORD(lParam);
             pState->clientHeight = HIWORD(lParam);
-            pState->game = new Game(pState->clientWidth, pState->clientHeight);
+            pState->game = new Game(hWnd, pState->clientWidth, pState->clientHeight);
             return 0;
 
     }
-    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+    return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
