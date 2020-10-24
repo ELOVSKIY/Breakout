@@ -19,6 +19,6 @@ Brick::Brick(int left,
 void Brick::Draw(HDC &hdc) {
     HBRUSH hbrush = CreateSolidBrush(this->colorRef);
     SelectObject(hdc, hbrush);
-    Rectangle(hdc, this->left, this->top, this->left + this->width, this->top + this->height);
+    Rectangle(hdc, GetLeft(), GetTop(), GetRight(), GetBottom());
     DeleteObject(hbrush);
 }

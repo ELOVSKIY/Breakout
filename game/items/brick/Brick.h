@@ -7,7 +7,7 @@
 
 #include "../GameItem.h"
 
-class Brick : GameItem {
+class Brick : public GameItem {
 private:
     COLORREF colorRef;
 public:

@@ -11,6 +11,6 @@ Plate::Plate(const int left,
 void Plate::Draw(HDC &hdc) {
     HBRUSH hbrush = CreateSolidBrush(RGB(234, 0, 91));
     SelectObject(hdc, hbrush);
-    Rectangle(hdc, this->left, this->top, this->left + this->width, this->top + this->height);
+    Rectangle(hdc, GetLeft(), GetTop(), GetRight(), GetBottom());
     DeleteObject(hbrush);
 }

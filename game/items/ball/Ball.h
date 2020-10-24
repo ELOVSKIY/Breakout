@@ -5,7 +5,7 @@
 #ifndef BREAKOUT_BALL_H
 #define BREAKOUT_BALL_H
 
-#include "../GameItem.h"
+#include "../MovableGameItem.h"
 
 //class SpeedDirection {
 //private:
@@ -16,14 +16,14 @@
 //    int getVerticalDirection();
 //};
 
-class Ball : GameItem {
+class Ball : public MovableGameItem{
 private:
     int speed;
 //    SpeedDirection speedDirection;
 public:
-//    void move();
+//    void Move();
     void Draw(HDC &hdc) override;
-    Ball(int left, int top, int radius);
+    Ball(int left, int top, int radius, int speed);
 };
 
 
