@@ -4,16 +4,10 @@
 #define BRICK_ROW_COUNT 15
 #define BRICK_COLUMN_COUNT 15
 #define PLATE_SPEED 15
-#define BALL_SPEED 15
+#define BALL_SPEED 3
+#define ACCURACY = 0.01L
 
-Game::Game(const HWND hwnd,
-           const int width,
-           const int height) {
-    this->hWnd = hWnd;
-    this->width = width;
-    this->height = height;
-
-    //
+void Game::Initialize() {
     this->bricks = new list<Brick *>;
     this->gameItems = new list<GameItem *>;
     int brickWidth = width / BRICK_ROW_COUNT;
@@ -26,31 +20,47 @@ Game::Game(const HWND hwnd,
         }
 
     }
-    const int plateHeight = 20;
-    const int plateWidth = 400;
-    const int plateSpeed = 20;
-    const int plateTop = height - plateHeight;
-    const int leftPlate = (width / 2) - (plateWidth / 2);
+    const measure plateHeight = 20;
+    const measure plateWidth = 400;
+    const measure plateSpeed = 20;
+    const measure plateTop = height - plateHeight;
+    const measure leftPlate = (width / 2) - (plateWidth / 2);
     this->plate = new Plate(leftPlate, plateTop, plateWidth, plateHeight, plateSpeed);
     this->gameItems->push_front(plate);
-    const int ballDiameter = 40;
-    const int leftBall = (width / 2) - (ballDiameter / 2);
-    const int topBall = height - plateHeight - ballDiameter;
+    const measure ballDiameter = 40;
+    const measure leftBall = (width / 2) - (ballDiameter / 2);
+    const measure topBall = height - plateHeight - ballDiameter;
     this->ball = new Ball(leftBall, topBall, ballDiameter, BALL_SPEED);
     this->gameItems->push_front(ball);
+}
 
-//    std::thread thread(&Game::Click, this);
+Game::Game(const HWND hwnd,
+           const int width,
+           const int height) {
+    this->hWnd = hWnd;
+    this->width = width;
+    this->height = height;
+    Initialize();
 }
 
 void Game::Click() {
-//    while (active) {
-//        Sleep(1000 / 60);
-//        const measure ballSpeed = 1;
-//        const Vector vector = {{1, ballSpeed}, {1, 0}};
-//        this->ball->Move(vector);
-//        InvalidateRect(hWnd, NULL, true);
-//        UpdateWindow(hWnd);
+    Vector vector = ball->GetVector();
+    Vector availableVector{vector};
+    const measure availablePercent = GetAvailableVectorPercent(ball, vector);
+    availableVector.xVector.value = vector.xVector.value * availablePercent;
+    availableVector.yVector.value = vector.yVector.value * availablePercent;
+    ball->Move(availableVector);
+//    if (vector.xVector.value == minValue) {
+//        ball->InverseHorizontal();
 //    }
+//    if (vector.yVector.value == minValue) {
+//        ball->InverseVertical();
+//    }
+    const float notAvailablePercent = 1 - availablePercent;
+    Vector notAvailableVector{vector};
+    notAvailableVector.xVector.value = vector.xVector.value * notAvailablePercent;
+    notAvailableVector.yVector.value = vector.yVector.value * notAvailablePercent;
+    ball->Move(notAvailableVector);
 }
 
 void Game::Draw(HWND hWnd) {
@@ -82,25 +92,30 @@ void Game::Draw(HWND hWnd) {
     EndPaint(hWnd, &ps);
 }
 
-void Game::GetInput(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+void Game::GetInput(HWND hWnd,
+                    UINT uMsg,
+                    WPARAM wParam,
+                    LPARAM lParam) {
     switch (uMsg) {
         case WM_KEYDOWN:
             Vector vector;
             const measure plateSpeed = plate->GetSpeed();
             switch (lParam) {
                 case VK_RIGHT:
-                    vector = {{1, plateSpeed}, {1, 0}};
+                    vector = {{1, plateSpeed},
+                              {0, 0}};
                     break;
                 case VK_LEFT:
-                    vector  = {{-1, plateSpeed}, {1, 0}};
+                    vector = {{-1, plateSpeed},
+                              {0,  0}};
                     break;
-                case VK_UP:
-                    vector = {{1, 0}, {-1, plateSpeed}};
-                    break;
-                case VK_DOWN:
-                    vector = {{1, 0}, {1, plateSpeed}};
+                default:
+                    vector = {{0, 0},
+                              {0, 0}};
                     break;
             }
+            const measure maxAvailable = GetAvailableVectorPercent(plate, vector);
+            vector.xVector.value = min(maxAvailable, vector.xVector.value);
             this->plate->Move(vector);
             InvalidateRect(hWnd, NULL, true);
             UpdateWindow(hWnd);
@@ -124,80 +139,124 @@ measure Game::GetMinGameItemMeasure() {
     return minMeasure;
 }
 
-measure Game::GetMaxAvailableDistance(const GameItem *gameItem,
-                                      const Vector vector) {
+float Game::GetAvailableVectorPercent(const GameItem *gameItem,
+                                      Vector &vector) {
     measure minDistance = MEASURE_MAX;
-    if (vector.yVector.direction == POSITIVE) {
+    if (vector.yVector.direction < 0) {
         const measure topDistance = gameItem->GetTop();
         if (topDistance < minDistance) {
             minDistance = topDistance;
         }
-    } else {
-        const measure bottomDistance = height - gameItem->GetBottom();
-        if (bottomDistance < minDistance) {
-            minDistance = bottomDistance;
-        }
     }
-    if (vector.xVector.direction == POSITIVE) {
+    if (vector.xVector.direction > 0) {
         const measure rightDistance = width - gameItem->GetRight();
         if (rightDistance < minDistance) {
             minDistance = rightDistance;
         }
-    } else {
+    }
+    if (vector.xVector.direction < 0) {
         const measure leftDistance = gameItem->GetLeft();
         if (leftDistance < minDistance) {
             minDistance = leftDistance;
         }
     }
-    if (vector.xVector.value < minDistance) {
-        minDistance = vector.xVector.value;
+    if (vector.yVector.direction > 0) {
+        const measure bottomDistance = height - gameItem->GetBottom();
+        if (bottomDistance == 0) {
+            GameOver();
+            return 0.0;
+        }
+        if (bottomDistance < minDistance) {
+            minDistance = bottomDistance;
+        }
     }
-    if (vector.yVector.value < minDistance) {
-        minDistance = vector.yVector.value;
-    }
-    return GetMaxAvailableDistance(gameItem, vector, minDistance);
+    return GetAvailableVectorPercent(gameItem, vector, minDistance);
 }
 
-measure Game::GetMaxAvailableDistance(const GameItem *gameItem,
-                                      const Vector vector,
+float Game::GetAvailableVectorPercent(const GameItem *gameItem,
+                                      Vector &vector,
                                       const measure maxAvailableDistance) {
-    measure xOffset = 0;
-    measure yOffset = 0;
-    //TODO откуда считать?
-    measure xPos = gameItem->GetLeft();
-    measure yPos = gameItem->GetTop();
-    const measure step = GetMinGameItemMeasure() / 2;
-    const measure maxSpeedValue = max(vector.xVector.value, vector.yVector.value);
-    const measure xStep = (vector.xVector.value / maxSpeedValue) * step;
-    const measure yStep = (vector.yVector.value / maxSpeedValue) * step;
-    while (!IsBetweenHorizontalEdge(yPos) &&
-           !IsBetweenVerticalEdge(xPos) &&
-           xOffset + xStep < maxAvailableDistance &&
-           yOffset + yStep < maxAvailableDistance) {
-        xOffset += xStep;
-        yOffset += yStep;
-        xPos = gameItem->GetLeft() + (xOffset * vector.xVector.direction);
-        yPos = gameItem->GetTop() + (yOffset * vector.yVector.direction);
+    if (maxAvailableDistance != 0) {
+        measure xOffset = 0;
+        measure yOffset = 0;
+
+        //TODO откуда считать?
+        measure xPos = gameItem->GetLeft() + gameItem->GetWidth() / 2;
+        measure yPos = gameItem->GetTop() + gameItem->GetHeight() / 2;
+
+        const measure step = 0.1;//min(GetMinGameItemMeasure() / 2, maxAvailableDistance);
+        const measure maxSpeedValue = max(vector.xVector.value, vector.yVector.value);
+        measure xStep = (vector.xVector.value / maxSpeedValue) * step;
+        measure yStep = (vector.yVector.value / maxSpeedValue) * step;
+
+        GameItem *nearestGameItem = GetNearestGameItem(gameItem, vector, xPos, yPos);
+        while ((nearestGameItem == nullptr) &&
+               (xOffset < maxAvailableDistance && xOffset < vector.xVector.value) &&
+               (yOffset < maxAvailableDistance && yOffset < vector.yVector.value)) {
+            if (xOffset + xStep >= maxAvailableDistance) {
+                const measure coefficient = (maxAvailableDistance - xOffset) / xStep;
+                xStep = xStep * coefficient;
+                yStep = yStep * coefficient;
+            }
+            if (yOffset + yStep >= maxAvailableDistance) {
+                const measure coefficient = (maxAvailableDistance - yOffset) / yStep;
+                xStep = xStep * coefficient;
+                yStep = yStep * coefficient;
+            }
+            xOffset += xStep;
+            yOffset += yStep;
+            xPos = gameItem->GetLeft() + (xOffset * vector.xVector.direction);
+            yPos = gameItem->GetTop() + (yOffset * vector.yVector.direction);
+            nearestGameItem = GetNearestGameItem(gameItem, vector, xPos, yPos);
+        }
+        if (vector.xVector.direction != 0) {
+            return (float) xOffset / (float) vector.xVector.value;
+        }
+        if (vector.yVector.direction != 0) {
+            return (float) yOffset / (float) vector.yVector.value;
+        }
+        return 0.0;
+    } else {
+        return 0.0;
     }
-    return min(xOffset, yOffset);
 }
 
-bool Game::IsBetweenHorizontalEdge(const measure yPos) {
-    for (const GameItem *gameItem : *gameItems) {
-        if ((yPos > gameItem->GetTop()) && (yPos < gameItem->GetBottom())) {
-            return true;
+//TODO разобраться с константами в функциях
+GameItem *Game::GetNearestGameItem(const GameItem *gameItem,
+                                   Vector &vector,
+                                   const measure xCenterPos,
+                                   const measure yCenterPos) const {
+    const measure gameItemHeight = gameItem->GetHeight();
+    const measure gameItemWidth = gameItem->GetWidth();
+    const measure edgeXPos = xCenterPos + (gameItemWidth / 2) * vector.xVector.direction;
+    const measure edgeYPos = yCenterPos + (gameItemHeight / 2) * vector.yVector.direction;
+    for (GameItem *gameItem : *gameItems) {
+        if ((edgeYPos > gameItem->GetTop()) && (edgeYPos < gameItem->GetBottom()) &&
+            (edgeXPos > gameItem->GetLeft()) && (edgeXPos < gameItem->GetRight())) {
+            const measure minVerticalDiff =
+                    min(
+                            abs(gameItem->GetTop() - edgeYPos),
+                            abs(gameItem->GetBottom() - edgeYPos));
+            const measure minHorizontalDiff =
+                    min(
+                            abs(gameItem->GetLeft() - edgeXPos),
+                            abs(gameItem->GetRight() - edgeXPos));
+            const measure minDiff = min(minHorizontalDiff, minVerticalDiff);
+            if (minDiff == minVerticalDiff) {
+                vector.ChangeVerticalDirection();
+            }
+            if (minDiff == minHorizontalDiff) {
+                vector.ChangeVerticalDirection();
+            }
+            return gameItem;
         }
     }
-    return false;
+    return nullptr;
 }
 
-bool Game::IsBetweenVerticalEdge(const measure xPos) {
-    for (const GameItem *gameItem : *gameItems) {
-        if ((xPos > gameItem->GetLeft()) && (xPos < gameItem->GetRight())) {
-            return true;
-        }
-    }
-    return false;
+void Game::GameOver() {
+
 }
+
 
 

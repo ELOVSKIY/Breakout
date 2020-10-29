@@ -38,19 +38,19 @@ NULL=nul
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2020.2.1\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "D:\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2020.2.1\bin\cmake\win\bin\cmake.exe" -E rm -f
+RM = "D:\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Helicoptera\Desktop\Course-5\Breakout
+CMAKE_SOURCE_DIR = C:\Users\avter\Desktop\Breakout
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Helicoptera\Desktop\Course-5\Breakout\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\avter\Desktop\Breakout\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles\Breakout.dir\depend.make
@@ -63,36 +63,162 @@ include CMakeFiles\Breakout.dir\flags.make
 
 CMakeFiles\Breakout.dir\main.cpp.obj: CMakeFiles\Breakout.dir\flags.make
 CMakeFiles\Breakout.dir\main.cpp.obj: ..\main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Helicoptera\Desktop\Course-5\Breakout\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Breakout.dir/main.cpp.obj"
-	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1427~1.291\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\Breakout.dir\main.cpp.obj /FdCMakeFiles\Breakout.dir\ /FS -c C:\Users\Helicoptera\Desktop\Course-5\Breakout\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\avter\Desktop\Breakout\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Breakout.dir/main.cpp.obj"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\Breakout.dir\main.cpp.obj /FdCMakeFiles\Breakout.dir\ /FS -c C:\Users\avter\Desktop\Breakout\main.cpp
 <<
 
 CMakeFiles\Breakout.dir\main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Breakout.dir/main.cpp.i"
-	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1427~1.291\bin\Hostx86\x86\cl.exe > CMakeFiles\Breakout.dir\main.cpp.i @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Helicoptera\Desktop\Course-5\Breakout\main.cpp
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe > CMakeFiles\Breakout.dir\main.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\avter\Desktop\Breakout\main.cpp
 <<
 
 CMakeFiles\Breakout.dir\main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Breakout.dir/main.cpp.s"
-	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1427~1.291\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\Breakout.dir\main.cpp.s /c C:\Users\Helicoptera\Desktop\Course-5\Breakout\main.cpp
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\Breakout.dir\main.cpp.s /c C:\Users\avter\Desktop\Breakout\main.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\plate\Plate.cpp.obj: CMakeFiles\Breakout.dir\flags.make
+CMakeFiles\Breakout.dir\game\items\plate\Plate.cpp.obj: ..\game\items\plate\Plate.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\avter\Desktop\Breakout\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Breakout.dir/game/items/plate/Plate.cpp.obj"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\Breakout.dir\game\items\plate\Plate.cpp.obj /FdCMakeFiles\Breakout.dir\ /FS -c C:\Users\avter\Desktop\Breakout\game\items\plate\Plate.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\plate\Plate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Breakout.dir/game/items/plate/Plate.cpp.i"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe > CMakeFiles\Breakout.dir\game\items\plate\Plate.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\avter\Desktop\Breakout\game\items\plate\Plate.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\plate\Plate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Breakout.dir/game/items/plate/Plate.cpp.s"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\Breakout.dir\game\items\plate\Plate.cpp.s /c C:\Users\avter\Desktop\Breakout\game\items\plate\Plate.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\GameItem.cpp.obj: CMakeFiles\Breakout.dir\flags.make
+CMakeFiles\Breakout.dir\game\items\GameItem.cpp.obj: ..\game\items\GameItem.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\avter\Desktop\Breakout\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Breakout.dir/game/items/GameItem.cpp.obj"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\Breakout.dir\game\items\GameItem.cpp.obj /FdCMakeFiles\Breakout.dir\ /FS -c C:\Users\avter\Desktop\Breakout\game\items\GameItem.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\GameItem.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Breakout.dir/game/items/GameItem.cpp.i"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe > CMakeFiles\Breakout.dir\game\items\GameItem.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\avter\Desktop\Breakout\game\items\GameItem.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\GameItem.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Breakout.dir/game/items/GameItem.cpp.s"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\Breakout.dir\game\items\GameItem.cpp.s /c C:\Users\avter\Desktop\Breakout\game\items\GameItem.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\brick\Brick.cpp.obj: CMakeFiles\Breakout.dir\flags.make
+CMakeFiles\Breakout.dir\game\items\brick\Brick.cpp.obj: ..\game\items\brick\Brick.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\avter\Desktop\Breakout\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Breakout.dir/game/items/brick/Brick.cpp.obj"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\Breakout.dir\game\items\brick\Brick.cpp.obj /FdCMakeFiles\Breakout.dir\ /FS -c C:\Users\avter\Desktop\Breakout\game\items\brick\Brick.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\brick\Brick.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Breakout.dir/game/items/brick/Brick.cpp.i"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe > CMakeFiles\Breakout.dir\game\items\brick\Brick.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\avter\Desktop\Breakout\game\items\brick\Brick.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\brick\Brick.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Breakout.dir/game/items/brick/Brick.cpp.s"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\Breakout.dir\game\items\brick\Brick.cpp.s /c C:\Users\avter\Desktop\Breakout\game\items\brick\Brick.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\Game.cpp.obj: CMakeFiles\Breakout.dir\flags.make
+CMakeFiles\Breakout.dir\game\Game.cpp.obj: ..\game\Game.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\avter\Desktop\Breakout\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Breakout.dir/game/Game.cpp.obj"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\Breakout.dir\game\Game.cpp.obj /FdCMakeFiles\Breakout.dir\ /FS -c C:\Users\avter\Desktop\Breakout\game\Game.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\Game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Breakout.dir/game/Game.cpp.i"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe > CMakeFiles\Breakout.dir\game\Game.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\avter\Desktop\Breakout\game\Game.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\Game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Breakout.dir/game/Game.cpp.s"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\Breakout.dir\game\Game.cpp.s /c C:\Users\avter\Desktop\Breakout\game\Game.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\ball\Ball.cpp.obj: CMakeFiles\Breakout.dir\flags.make
+CMakeFiles\Breakout.dir\game\items\ball\Ball.cpp.obj: ..\game\items\ball\Ball.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\avter\Desktop\Breakout\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Breakout.dir/game/items/ball/Ball.cpp.obj"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\Breakout.dir\game\items\ball\Ball.cpp.obj /FdCMakeFiles\Breakout.dir\ /FS -c C:\Users\avter\Desktop\Breakout\game\items\ball\Ball.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\ball\Ball.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Breakout.dir/game/items/ball/Ball.cpp.i"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe > CMakeFiles\Breakout.dir\game\items\ball\Ball.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\avter\Desktop\Breakout\game\items\ball\Ball.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\ball\Ball.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Breakout.dir/game/items/ball/Ball.cpp.s"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\Breakout.dir\game\items\ball\Ball.cpp.s /c C:\Users\avter\Desktop\Breakout\game\items\ball\Ball.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\MovableGameItem.cpp.obj: CMakeFiles\Breakout.dir\flags.make
+CMakeFiles\Breakout.dir\game\items\MovableGameItem.cpp.obj: ..\game\items\MovableGameItem.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\avter\Desktop\Breakout\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Breakout.dir/game/items/MovableGameItem.cpp.obj"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\Breakout.dir\game\items\MovableGameItem.cpp.obj /FdCMakeFiles\Breakout.dir\ /FS -c C:\Users\avter\Desktop\Breakout\game\items\MovableGameItem.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\MovableGameItem.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Breakout.dir/game/items/MovableGameItem.cpp.i"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe > CMakeFiles\Breakout.dir\game\items\MovableGameItem.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\avter\Desktop\Breakout\game\items\MovableGameItem.cpp
+<<
+
+CMakeFiles\Breakout.dir\game\items\MovableGameItem.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Breakout.dir/game/items/MovableGameItem.cpp.s"
+	D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\Breakout.dir\game\items\MovableGameItem.cpp.s /c C:\Users\avter\Desktop\Breakout\game\items\MovableGameItem.cpp
 <<
 
 # Object files for target Breakout
 Breakout_OBJECTS = \
-"CMakeFiles\Breakout.dir\main.cpp.obj"
+"CMakeFiles\Breakout.dir\main.cpp.obj" \
+"CMakeFiles\Breakout.dir\game\items\plate\Plate.cpp.obj" \
+"CMakeFiles\Breakout.dir\game\items\GameItem.cpp.obj" \
+"CMakeFiles\Breakout.dir\game\items\brick\Brick.cpp.obj" \
+"CMakeFiles\Breakout.dir\game\Game.cpp.obj" \
+"CMakeFiles\Breakout.dir\game\items\ball\Ball.cpp.obj" \
+"CMakeFiles\Breakout.dir\game\items\MovableGameItem.cpp.obj"
 
 # External object files for target Breakout
 Breakout_EXTERNAL_OBJECTS =
 
 Breakout.exe: CMakeFiles\Breakout.dir\main.cpp.obj
+Breakout.exe: CMakeFiles\Breakout.dir\game\items\plate\Plate.cpp.obj
+Breakout.exe: CMakeFiles\Breakout.dir\game\items\GameItem.cpp.obj
+Breakout.exe: CMakeFiles\Breakout.dir\game\items\brick\Brick.cpp.obj
+Breakout.exe: CMakeFiles\Breakout.dir\game\Game.cpp.obj
+Breakout.exe: CMakeFiles\Breakout.dir\game\items\ball\Ball.cpp.obj
+Breakout.exe: CMakeFiles\Breakout.dir\game\items\MovableGameItem.cpp.obj
 Breakout.exe: CMakeFiles\Breakout.dir\build.make
 Breakout.exe: CMakeFiles\Breakout.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Helicoptera\Desktop\Course-5\Breakout\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Breakout.exe"
-	"C:\Program Files\JetBrains\CLion 2020.2.1\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\Breakout.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\mt.exe --manifests  -- C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1427~1.291\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\Breakout.dir\objects1.rsp @<<
- /out:Breakout.exe /implib:Breakout.lib /pdb:C:\Users\Helicoptera\Desktop\Course-5\Breakout\cmake-build-debug\Breakout.pdb /version:0.0  /machine:X86 /debug /INCREMENTAL /subsystem:windows  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\avter\Desktop\Breakout\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable Breakout.exe"
+	"D:\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\Breakout.dir --rc="D:\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.18362.0\x86\mt.exe" --manifests  -- D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\Breakout.dir\objects1.rsp @<<
+ /out:Breakout.exe /implib:Breakout.lib /pdb:C:\Users\avter\Desktop\Breakout\cmake-build-debug\Breakout.pdb /version:0.0  /machine:X86 /debug /INCREMENTAL /subsystem:windows  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
 <<
 
 # Rule to build all files generated by this target.
@@ -105,6 +231,6 @@ CMakeFiles\Breakout.dir\clean:
 .PHONY : CMakeFiles\Breakout.dir\clean
 
 CMakeFiles\Breakout.dir\depend:
-	$(CMAKE_COMMAND) -E cmake_depends "NMake Makefiles" C:\Users\Helicoptera\Desktop\Course-5\Breakout C:\Users\Helicoptera\Desktop\Course-5\Breakout C:\Users\Helicoptera\Desktop\Course-5\Breakout\cmake-build-debug C:\Users\Helicoptera\Desktop\Course-5\Breakout\cmake-build-debug C:\Users\Helicoptera\Desktop\Course-5\Breakout\cmake-build-debug\CMakeFiles\Breakout.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "NMake Makefiles" C:\Users\avter\Desktop\Breakout C:\Users\avter\Desktop\Breakout C:\Users\avter\Desktop\Breakout\cmake-build-debug C:\Users\avter\Desktop\Breakout\cmake-build-debug C:\Users\avter\Desktop\Breakout\cmake-build-debug\CMakeFiles\Breakout.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles\Breakout.dir\depend
 

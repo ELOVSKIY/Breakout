@@ -4,7 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/Helicoptera/Desktop/Course-5/Breakout/main.cpp" "C:/Users/Helicoptera/Desktop/Course-5/Breakout/cmake-build-debug/CMakeFiles/Breakout.dir/main.cpp.obj"
+  "C:/Users/avter/Desktop/Breakout/game/Game.cpp" "C:/Users/avter/Desktop/Breakout/cmake-build-debug/CMakeFiles/Breakout.dir/game/Game.cpp.obj"
+  "C:/Users/avter/Desktop/Breakout/game/items/GameItem.cpp" "C:/Users/avter/Desktop/Breakout/cmake-build-debug/CMakeFiles/Breakout.dir/game/items/GameItem.cpp.obj"
+  "C:/Users/avter/Desktop/Breakout/game/items/MovableGameItem.cpp" "C:/Users/avter/Desktop/Breakout/cmake-build-debug/CMakeFiles/Breakout.dir/game/items/MovableGameItem.cpp.obj"
+  "C:/Users/avter/Desktop/Breakout/game/items/ball/Ball.cpp" "C:/Users/avter/Desktop/Breakout/cmake-build-debug/CMakeFiles/Breakout.dir/game/items/ball/Ball.cpp.obj"
+  "C:/Users/avter/Desktop/Breakout/game/items/brick/Brick.cpp" "C:/Users/avter/Desktop/Breakout/cmake-build-debug/CMakeFiles/Breakout.dir/game/items/brick/Brick.cpp.obj"
+  "C:/Users/avter/Desktop/Breakout/game/items/plate/Plate.cpp" "C:/Users/avter/Desktop/Breakout/cmake-build-debug/CMakeFiles/Breakout.dir/game/items/plate/Plate.cpp.obj"
+  "C:/Users/avter/Desktop/Breakout/main.cpp" "C:/Users/avter/Desktop/Breakout/cmake-build-debug/CMakeFiles/Breakout.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")
 

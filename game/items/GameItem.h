@@ -9,7 +9,7 @@
 #include <Windows.h>
 
 typedef float measure;
-#define MEASURE_MAX INFINITY
+#define MEASURE_MAX 100000
 
 typedef struct Border {
     measure top;

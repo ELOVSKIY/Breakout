@@ -17,13 +17,30 @@ enum Direction {
 #define NEGATIVE_DIRECTION -1
 
 typedef struct Velocity {
-    char direction;
+    measure direction;
     measure value;
 } Velocity;
 
 typedef struct Vector {
     Velocity xVector;
     Velocity yVector;
+
+public:
+    Vector operator*(const float value) {
+        const float absValue = abs(value);
+        const float sign = value / absValue;
+        Vector vector = {{xVector.direction * sign, xVector.value * absValue},
+                         {yVector.direction * sign, yVector.value * absValue}};
+        return vector;
+    }
+
+    void ChangeVerticalDirection() {
+        yVector.direction = -yVector.direction;
+    }
+
+    void ChangeHorizontalDirection() {
+        yVector.direction = -yVector.direction;
+    }
 } Vector;
 
 

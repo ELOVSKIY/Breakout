@@ -1,7 +1,15 @@
 #include "Ball.h"
-//#include <gdiplus.h>
 
-//using namespace Gdiplus;
+Ball::Ball(const int left,
+           const int top,
+           const int radius,
+           const measure speed) : MovableGameItem(left, top, radius, radius, speed) {
+    const measure xSpeed = speed * 1;
+    const measure ySpeed = speed * 1.5;
+    vector = {{1,  xSpeed},
+              {-1, ySpeed}};
+}
+
 
 void Ball::Draw(HDC &hdc) {
     HBRUSH hbrush = CreateSolidBrush(RGB(140, 50, 200));
@@ -24,6 +32,15 @@ void Ball::Draw(HDC &hdc) {
 
 }
 
-Ball::Ball(int left, int top, int radius, int speed) : MovableGameItem(left, top, radius, radius, speed){
-
+void Ball::InverseHorizontal() {
+    vector.xVector.direction = -vector.xVector.direction;
 }
+
+void Ball::InverseVertical() {
+    vector.yVector.direction = -vector.yVector.direction;
+}
+
+Vector &Ball::GetVector() {
+    return vector;
+}
+

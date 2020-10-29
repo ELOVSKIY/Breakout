@@ -64,13 +64,26 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     ShowWindow(hwnd, SW_SHOWMAXIMIZED);
 
 
+//    SetTimer(hwnd, 1, 100, NULL);
     MSG msg = {};
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
+    bool active = true;
+    while (active) {
+        while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+            if (msg.message == WM_QUIT){
+                active = false;
+            }
+        }
+
+        if (pState->game) {
+            pState->game->Click();
+        }
+        InvalidateRect(hwnd, NULL, true);
+        UpdateWindow(hwnd);
+        Sleep(1000 / 120);
     }
 
-//    Gdiplus::GdiplusShutdown(gdiplusToken);
     return 0;
 }
 

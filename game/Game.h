@@ -30,22 +30,27 @@ public:
          const int width,
          const int height);
 
-//    void Initialize();
+    void Initialize();
+
+    void StartGame();
+
+    void GameOver();
 
     void Click();
 
-    measure GetMaxAvailableDistance(const GameItem *gameItem,
-                                    const Vector vector);
+    float GetAvailableVectorPercent(const GameItem *gameItem,
+                                    Vector& vector);
 
-    measure GetMaxAvailableDistance(const GameItem *gameItem,
-                                    const Vector vector,
+    float GetAvailableVectorPercent(const GameItem *gameItem,
+                                    Vector& vector,
                                     const measure maxAvailableDistance);
 
     measure GetMinGameItemMeasure();
 
-    bool IsBetweenHorizontalEdge(const measure yPos);
-
-    bool IsBetweenVerticalEdge(const measure xPos);
+    GameItem *GetNearestGameItem(const GameItem *gameItem,
+                                 Vector& vector,
+                                 const measure xCenterPos,
+                                 const measure yCenterPos) const;
 
     void Draw(HWND hWnd);
 

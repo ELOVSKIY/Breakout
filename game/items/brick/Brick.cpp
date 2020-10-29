@@ -1,6 +1,3 @@
-//
-// Created by Helicoptera on 17.10.2020.
-//
 #include "Brick.h"
 
 Brick::Brick(int left,

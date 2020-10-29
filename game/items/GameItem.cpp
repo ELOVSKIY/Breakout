@@ -57,12 +57,12 @@ measure GameItem::GetBottom() const {
     return top + height;
 }
 
-void GameItem::SetLeft(int left) {
+void GameItem::SetLeft(const int left) {
     this->left = left;
     this->right = left + width;
 }
 
-void GameItem::SetTop(int top) {
+void GameItem::SetTop(const int top) {
     this->top = top;
     this->bottom = top + height;
 }

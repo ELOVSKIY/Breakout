@@ -43,19 +43,19 @@ NULL=nul
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2020.2.1\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "D:\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2020.2.1\bin\cmake\win\bin\cmake.exe" -E rm -f
+RM = "D:\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Helicoptera\Desktop\Course-5\Breakout
+CMAKE_SOURCE_DIR = C:\Users\avter\Desktop\Breakout
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Helicoptera\Desktop\Course-5\Breakout\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\avter\Desktop\Breakout\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = C:\Users\Helicoptera\Desktop\Course-5\Breakout\cmake-build-de
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	echo >nul && "C:\Program Files\JetBrains\CLion 2020.2.1\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+	echo >nul && "D:\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -74,7 +74,7 @@ edit_cache\fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	echo >nul && "C:\Program Files\JetBrains\CLion 2020.2.1\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	echo >nul && "D:\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -84,9 +84,9 @@ rebuild_cache\fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Helicoptera\Desktop\Course-5\Breakout\cmake-build-debug\CMakeFiles C:\Users\Helicoptera\Desktop\Course-5\Breakout\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\avter\Desktop\Breakout\cmake-build-debug\CMakeFiles C:\Users\avter\Desktop\Breakout\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Helicoptera\Desktop\Course-5\Breakout\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\avter\Desktop\Breakout\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -127,6 +127,168 @@ Breakout\fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\build
 .PHONY : Breakout\fast
 
+game\Game.obj: game\Game.cpp.obj
+
+.PHONY : game\Game.obj
+
+# target to build an object file
+game\Game.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\Game.cpp.obj
+.PHONY : game\Game.cpp.obj
+
+game\Game.i: game\Game.cpp.i
+
+.PHONY : game\Game.i
+
+# target to preprocess a source file
+game\Game.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\Game.cpp.i
+.PHONY : game\Game.cpp.i
+
+game\Game.s: game\Game.cpp.s
+
+.PHONY : game\Game.s
+
+# target to generate assembly for a file
+game\Game.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\Game.cpp.s
+.PHONY : game\Game.cpp.s
+
+game\items\GameItem.obj: game\items\GameItem.cpp.obj
+
+.PHONY : game\items\GameItem.obj
+
+# target to build an object file
+game\items\GameItem.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\GameItem.cpp.obj
+.PHONY : game\items\GameItem.cpp.obj
+
+game\items\GameItem.i: game\items\GameItem.cpp.i
+
+.PHONY : game\items\GameItem.i
+
+# target to preprocess a source file
+game\items\GameItem.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\GameItem.cpp.i
+.PHONY : game\items\GameItem.cpp.i
+
+game\items\GameItem.s: game\items\GameItem.cpp.s
+
+.PHONY : game\items\GameItem.s
+
+# target to generate assembly for a file
+game\items\GameItem.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\GameItem.cpp.s
+.PHONY : game\items\GameItem.cpp.s
+
+game\items\MovableGameItem.obj: game\items\MovableGameItem.cpp.obj
+
+.PHONY : game\items\MovableGameItem.obj
+
+# target to build an object file
+game\items\MovableGameItem.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\MovableGameItem.cpp.obj
+.PHONY : game\items\MovableGameItem.cpp.obj
+
+game\items\MovableGameItem.i: game\items\MovableGameItem.cpp.i
+
+.PHONY : game\items\MovableGameItem.i
+
+# target to preprocess a source file
+game\items\MovableGameItem.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\MovableGameItem.cpp.i
+.PHONY : game\items\MovableGameItem.cpp.i
+
+game\items\MovableGameItem.s: game\items\MovableGameItem.cpp.s
+
+.PHONY : game\items\MovableGameItem.s
+
+# target to generate assembly for a file
+game\items\MovableGameItem.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\MovableGameItem.cpp.s
+.PHONY : game\items\MovableGameItem.cpp.s
+
+game\items\ball\Ball.obj: game\items\ball\Ball.cpp.obj
+
+.PHONY : game\items\ball\Ball.obj
+
+# target to build an object file
+game\items\ball\Ball.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\ball\Ball.cpp.obj
+.PHONY : game\items\ball\Ball.cpp.obj
+
+game\items\ball\Ball.i: game\items\ball\Ball.cpp.i
+
+.PHONY : game\items\ball\Ball.i
+
+# target to preprocess a source file
+game\items\ball\Ball.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\ball\Ball.cpp.i
+.PHONY : game\items\ball\Ball.cpp.i
+
+game\items\ball\Ball.s: game\items\ball\Ball.cpp.s
+
+.PHONY : game\items\ball\Ball.s
+
+# target to generate assembly for a file
+game\items\ball\Ball.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\ball\Ball.cpp.s
+.PHONY : game\items\ball\Ball.cpp.s
+
+game\items\brick\Brick.obj: game\items\brick\Brick.cpp.obj
+
+.PHONY : game\items\brick\Brick.obj
+
+# target to build an object file
+game\items\brick\Brick.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\brick\Brick.cpp.obj
+.PHONY : game\items\brick\Brick.cpp.obj
+
+game\items\brick\Brick.i: game\items\brick\Brick.cpp.i
+
+.PHONY : game\items\brick\Brick.i
+
+# target to preprocess a source file
+game\items\brick\Brick.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\brick\Brick.cpp.i
+.PHONY : game\items\brick\Brick.cpp.i
+
+game\items\brick\Brick.s: game\items\brick\Brick.cpp.s
+
+.PHONY : game\items\brick\Brick.s
+
+# target to generate assembly for a file
+game\items\brick\Brick.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\brick\Brick.cpp.s
+.PHONY : game\items\brick\Brick.cpp.s
+
+game\items\plate\Plate.obj: game\items\plate\Plate.cpp.obj
+
+.PHONY : game\items\plate\Plate.obj
+
+# target to build an object file
+game\items\plate\Plate.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\plate\Plate.cpp.obj
+.PHONY : game\items\plate\Plate.cpp.obj
+
+game\items\plate\Plate.i: game\items\plate\Plate.cpp.i
+
+.PHONY : game\items\plate\Plate.i
+
+# target to preprocess a source file
+game\items\plate\Plate.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\plate\Plate.cpp.i
+.PHONY : game\items\plate\Plate.cpp.i
+
+game\items\plate\Plate.s: game\items\plate\Plate.cpp.s
+
+.PHONY : game\items\plate\Plate.s
+
+# target to generate assembly for a file
+game\items\plate\Plate.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Breakout.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Breakout.dir\game\items\plate\Plate.cpp.s
+.PHONY : game\items\plate\Plate.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -163,6 +325,24 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Breakout
+	@echo ... game/Game.obj
+	@echo ... game/Game.i
+	@echo ... game/Game.s
+	@echo ... game/items/GameItem.obj
+	@echo ... game/items/GameItem.i
+	@echo ... game/items/GameItem.s
+	@echo ... game/items/MovableGameItem.obj
+	@echo ... game/items/MovableGameItem.i
+	@echo ... game/items/MovableGameItem.s
+	@echo ... game/items/ball/Ball.obj
+	@echo ... game/items/ball/Ball.i
+	@echo ... game/items/ball/Ball.s
+	@echo ... game/items/brick/Brick.obj
+	@echo ... game/items/brick/Brick.i
+	@echo ... game/items/brick/Brick.s
+	@echo ... game/items/plate/Plate.obj
+	@echo ... game/items/plate/Plate.i
+	@echo ... game/items/plate/Plate.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

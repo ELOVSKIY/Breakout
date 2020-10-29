@@ -1,7 +1,3 @@
-//
-// Created by avter on 22.10.2020.
-//
-
 #include "MovableGameItem.h"
 
 MovableGameItem::MovableGameItem(int left, int top, int width, int height, int speed) :
@@ -11,8 +7,10 @@ MovableGameItem::MovableGameItem(int left, int top, int width, int height, int s
 
 
 void MovableGameItem::Move(const Vector vector) {
-    const measure top = GetTop() + (vector.yVector.value * vector.yVector.direction);
-    const measure left = GetLeft() + (vector.xVector.value * vector.xVector.direction);
+    const measure yOffset = (vector.yVector.value * vector.yVector.direction);
+    const measure xOffset = (vector.xVector.value * vector.xVector.direction);
+    const measure top = GetTop() + yOffset;
+    const measure left = GetLeft() + xOffset;
     SetTop(top);
     SetLeft(left);
 }

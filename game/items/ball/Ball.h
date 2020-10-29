@@ -1,29 +1,25 @@
-//
-// Created by Helicoptera on 17.10.2020.
-//
-
 #ifndef BREAKOUT_BALL_H
 #define BREAKOUT_BALL_H
 
 #include "../MovableGameItem.h"
 
-//class SpeedDirection {
-//private:
-//    int horizontalDirection;
-//    int verticalDirection;
-//public:
-//    int getHorizontalDirection();
-//    int getVerticalDirection();
-//};
-
 class Ball : public MovableGameItem{
 private:
-    int speed;
-//    SpeedDirection speedDirection;
+    Vector vector;
 public:
-//    void Move();
+    Ball(const int left,
+         const int top,
+         const int radius,
+         const measure speed);
+
     void Draw(HDC &hdc) override;
-    Ball(int left, int top, int radius, int speed);
+
+    void InverseHorizontal();
+
+    void InverseVertical();
+
+    Vector &GetVector();
+
 };
 
 
