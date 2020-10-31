@@ -1,13 +1,14 @@
 #include <thread>
 #include "Game.h"
 
-#define BRICK_ROW_COUNT 15
-#define BRICK_COLUMN_COUNT 15
-#define PLATE_SPEED 15
-#define BALL_SPEED 3
+#define BRICK_ROW_COUNT 30
+#define BRICK_COLUMN_COUNT 30
+#define PLATE_SPEED 25
+#define BALL_SPEED 5
 #define ACCURACY = 0.01L
 
 void Game::Initialize() {
+    this->active = true;
     this->bricks = new list<Brick *>;
     this->gameItems = new list<GameItem *>;
     int brickWidth = width / BRICK_ROW_COUNT;
@@ -22,10 +23,9 @@ void Game::Initialize() {
     }
     const measure plateHeight = 20;
     const measure plateWidth = 400;
-    const measure plateSpeed = 20;
     const measure plateTop = height - plateHeight;
     const measure leftPlate = (width / 2) - (plateWidth / 2);
-    this->plate = new Plate(leftPlate, plateTop, plateWidth, plateHeight, plateSpeed);
+    this->plate = new Plate(leftPlate, plateTop, plateWidth, plateHeight, PLATE_SPEED);
     this->gameItems->push_front(plate);
     const measure ballDiameter = 40;
     const measure leftBall = (width / 2) - (ballDiameter / 2);
@@ -37,30 +37,32 @@ void Game::Initialize() {
 Game::Game(const HWND hwnd,
            const int width,
            const int height) {
-    this->hWnd = hWnd;
+    this->hWnd = hwnd;
     this->width = width;
     this->height = height;
     Initialize();
 }
 
 void Game::Click() {
-    Vector vector = ball->GetVector();
-    Vector availableVector{vector};
-    const measure availablePercent = GetAvailableVectorPercent(ball, vector);
-    availableVector.xVector.value = vector.xVector.value * availablePercent;
-    availableVector.yVector.value = vector.yVector.value * availablePercent;
-    ball->Move(availableVector);
-//    if (vector.xVector.value == minValue) {
-//        ball->InverseHorizontal();
-//    }
-//    if (vector.yVector.value == minValue) {
-//        ball->InverseVertical();
-//    }
-    const float notAvailablePercent = 1 - availablePercent;
-    Vector notAvailableVector{vector};
-    notAvailableVector.xVector.value = vector.xVector.value * notAvailablePercent;
-    notAvailableVector.yVector.value = vector.yVector.value * notAvailablePercent;
-    ball->Move(notAvailableVector);
+    if (active) {
+        Vector vector = ball->GetVector();
+        Vector availableVector{vector};
+        const measure availablePercent = GetAvailableVectorPercent(ball, vector);
+        ball->SetVector(vector);
+        availableVector.xVector.value = vector.xVector.value * availablePercent;
+        availableVector.yVector.value = vector.yVector.value * availablePercent;
+        ball->Move(availableVector);
+        InvalidateRect(hWnd, NULL, true);
+        UpdateWindow(hWnd);
+
+        const float notAvailablePercent = 1 - availablePercent;
+        Vector notAvailableVector{vector};
+        notAvailableVector.xVector.value = vector.xVector.value * notAvailablePercent;
+        notAvailableVector.yVector.value = vector.yVector.value * notAvailablePercent;
+        ball->Move(notAvailableVector);
+        InvalidateRect(hWnd, NULL, true);
+        UpdateWindow(hWnd);
+    }
 }
 
 void Game::Draw(HWND hWnd) {
@@ -109,17 +111,23 @@ void Game::GetInput(HWND hWnd,
                     vector = {{-1, plateSpeed},
                               {0,  0}};
                     break;
+                case VK_SPACE:
+                    Initialize();
+                    break;
                 default:
                     vector = {{0, 0},
                               {0, 0}};
                     break;
             }
-            const measure maxAvailable = GetAvailableVectorPercent(plate, vector);
-            vector.xVector.value = min(maxAvailable, vector.xVector.value);
-            this->plate->Move(vector);
-            InvalidateRect(hWnd, NULL, true);
-            UpdateWindow(hWnd);
-            break;
+            if (active) {
+                Vector availableVector{vector};
+                const measure availableVectorPercent = GetAvailableVectorPercent(plate, vector);
+                availableVector.xVector.value = availableVector.xVector.value * availableVectorPercent;
+                this->plate->Move(availableVector);
+                InvalidateRect(hWnd, NULL, true);
+                UpdateWindow(hWnd);
+                break;
+            }
     }
 
 }
@@ -141,83 +149,94 @@ measure Game::GetMinGameItemMeasure() {
 
 float Game::GetAvailableVectorPercent(const GameItem *gameItem,
                                       Vector &vector) {
-    measure minDistance = MEASURE_MAX;
-    if (vector.yVector.direction < 0) {
-        const measure topDistance = gameItem->GetTop();
-        if (topDistance < minDistance) {
-            minDistance = topDistance;
-        }
-    }
-    if (vector.xVector.direction > 0) {
-        const measure rightDistance = width - gameItem->GetRight();
-        if (rightDistance < minDistance) {
-            minDistance = rightDistance;
-        }
-    }
-    if (vector.xVector.direction < 0) {
-        const measure leftDistance = gameItem->GetLeft();
-        if (leftDistance < minDistance) {
-            minDistance = leftDistance;
-        }
-    }
-    if (vector.yVector.direction > 0) {
-        const measure bottomDistance = height - gameItem->GetBottom();
-        if (bottomDistance == 0) {
-            GameOver();
-            return 0.0;
-        }
-        if (bottomDistance < minDistance) {
-            minDistance = bottomDistance;
-        }
-    }
-    return GetAvailableVectorPercent(gameItem, vector, minDistance);
-}
+    measure xOffset = 0;
+    measure yOffset = 0;
 
-float Game::GetAvailableVectorPercent(const GameItem *gameItem,
-                                      Vector &vector,
-                                      const measure maxAvailableDistance) {
-    if (maxAvailableDistance != 0) {
-        measure xOffset = 0;
-        measure yOffset = 0;
+    //TODO откуда считать?
+    measure xPos = gameItem->GetLeft() + gameItem->GetWidth() / 2 +
+                   (gameItem->GetWidth() / 2 * vector.xVector.direction);
+    measure yPos = gameItem->GetTop() + gameItem->GetHeight() / 2 +
+                   (gameItem->GetHeight() / 2 * vector.yVector.direction);
 
-        //TODO откуда считать?
-        measure xPos = gameItem->GetLeft() + gameItem->GetWidth() / 2;
-        measure yPos = gameItem->GetTop() + gameItem->GetHeight() / 2;
+    const measure step = GetMinGameItemMeasure() / 2;
+    const measure maxSpeedValue = max(vector.xVector.value, vector.yVector.value);
+    measure xStep = (vector.xVector.value / maxSpeedValue) * (step * vector.xVector.direction);
+    measure yStep = (vector.yVector.value / maxSpeedValue) * (step * vector.yVector.direction);
 
-        const measure step = 0.1;//min(GetMinGameItemMeasure() / 2, maxAvailableDistance);
-        const measure maxSpeedValue = max(vector.xVector.value, vector.yVector.value);
-        measure xStep = (vector.xVector.value / maxSpeedValue) * step;
-        measure yStep = (vector.yVector.value / maxSpeedValue) * step;
-
-        GameItem *nearestGameItem = GetNearestGameItem(gameItem, vector, xPos, yPos);
-        while ((nearestGameItem == nullptr) &&
-               (xOffset < maxAvailableDistance && xOffset < vector.xVector.value) &&
-               (yOffset < maxAvailableDistance && yOffset < vector.yVector.value)) {
-            if (xOffset + xStep >= maxAvailableDistance) {
-                const measure coefficient = (maxAvailableDistance - xOffset) / xStep;
-                xStep = xStep * coefficient;
-                yStep = yStep * coefficient;
+    bool calculating = true;
+    while (calculating) {
+        GameItem *nearestGameItem =
+                GetNearestGameItem(gameItem, vector, xPos + xOffset, yPos + yOffset);
+        if (nearestGameItem != nullptr) {
+            const measure gameItemXPos = nearestGameItem->GetLeft() + gameItem->GetWidth() / 2 +
+                                         (gameItem->GetWidth() / 2 * (-vector.xVector.direction));
+            const measure gameItemYPos = nearestGameItem->GetTop() + gameItem->GetHeight() / 2 +
+                                         (gameItem->GetHeight() / 2 * (-vector.yVector.direction));
+            const measure xDiff = ABS(gameItemXPos - xPos);
+            const measure yDiff = ABS(gameItemYPos - yPos);
+            //есть баг думает что от угла отскакивает
+            if (xDiff > vector.xVector.value && yDiff > vector.yVector.value) {
+                return 1.0;
+            } else {
+                float availableXPercent = 1.0;
+                float availableYPercent = 1.0;
+                if (vector.xVector.value != 0) {
+                    availableXPercent = (float) xDiff / vector.xVector.value;
+                }
+                if (vector.yVector.value != 0) {
+                    availableYPercent = (float) yDiff / vector.yVector.value;
+                }
+                const float minPercent = min(availableXPercent, availableYPercent);
+                if (minPercent == availableXPercent) {
+                    vector.ChangeHorizontalDirection();
+                }
+                if (minPercent == availableYPercent) {
+                    vector.ChangeVerticalDirection();
+                }
+                if (Brick* brick = dynamic_cast<Brick*>(nearestGameItem)) {
+                    bricks->remove(brick);
+                    gameItems->remove(brick);
+                }
+                return min(availableXPercent, availableYPercent);
             }
-            if (yOffset + yStep >= maxAvailableDistance) {
-                const measure coefficient = (maxAvailableDistance - yOffset) / yStep;
-                xStep = xStep * coefficient;
-                yStep = yStep * coefficient;
+        }
+
+        float availableXPercent = 1;
+        float availableYPercent = 1;
+        if (vector.xVector.value != 0) {
+            if (xPos + xOffset > width) {
+                const measure xDiff = width - xPos;
+                availableXPercent = (float) ABS(xDiff / vector.xVector.value);
+                vector.ChangeHorizontalDirection();
             }
+            if (xPos + xOffset < 0) {
+                const measure xDiff = xPos;
+                availableXPercent = (float) xDiff / vector.xVector.value;
+                vector.ChangeHorizontalDirection();
+            }
+        }
+        if (vector.yVector.value != 0) {
+            if (yPos + yOffset > height) {
+                GameOver();
+                const measure yDiff = height - yPos;
+                availableYPercent = (float) yDiff / vector.yVector.value;
+                vector.ChangeVerticalDirection();
+            }
+            if (yPos + yOffset < 0) {
+                const measure yDiff = yPos;
+                availableYPercent = (float) yDiff / vector.yVector.value;
+                vector.ChangeVerticalDirection();
+            }
+        }
+        if ((availableXPercent != 1) || (availableYPercent != 1)) {
+            return min(availableXPercent, availableYPercent);
+        }
+        if (ABS(xOffset) > vector.xVector.value && ABS(yOffset) > vector.yVector.value) {
+            return 1.0;
+        } else {
             xOffset += xStep;
             yOffset += yStep;
-            xPos = gameItem->GetLeft() + (xOffset * vector.xVector.direction);
-            yPos = gameItem->GetTop() + (yOffset * vector.yVector.direction);
-            nearestGameItem = GetNearestGameItem(gameItem, vector, xPos, yPos);
         }
-        if (vector.xVector.direction != 0) {
-            return (float) xOffset / (float) vector.xVector.value;
-        }
-        if (vector.yVector.direction != 0) {
-            return (float) yOffset / (float) vector.yVector.value;
-        }
-        return 0.0;
-    } else {
-        return 0.0;
     }
 }
 
@@ -233,21 +252,6 @@ GameItem *Game::GetNearestGameItem(const GameItem *gameItem,
     for (GameItem *gameItem : *gameItems) {
         if ((edgeYPos > gameItem->GetTop()) && (edgeYPos < gameItem->GetBottom()) &&
             (edgeXPos > gameItem->GetLeft()) && (edgeXPos < gameItem->GetRight())) {
-            const measure minVerticalDiff =
-                    min(
-                            abs(gameItem->GetTop() - edgeYPos),
-                            abs(gameItem->GetBottom() - edgeYPos));
-            const measure minHorizontalDiff =
-                    min(
-                            abs(gameItem->GetLeft() - edgeXPos),
-                            abs(gameItem->GetRight() - edgeXPos));
-            const measure minDiff = min(minHorizontalDiff, minVerticalDiff);
-            if (minDiff == minVerticalDiff) {
-                vector.ChangeVerticalDirection();
-            }
-            if (minDiff == minHorizontalDiff) {
-                vector.ChangeVerticalDirection();
-            }
             return gameItem;
         }
     }
@@ -255,7 +259,7 @@ GameItem *Game::GetNearestGameItem(const GameItem *gameItem,
 }
 
 void Game::GameOver() {
-
+    this->active = false;
 }
 
 

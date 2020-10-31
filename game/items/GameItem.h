@@ -10,6 +10,7 @@
 
 typedef float measure;
 #define MEASURE_MAX 100000
+#define ABS fabs
 
 typedef struct Border {
     measure top;

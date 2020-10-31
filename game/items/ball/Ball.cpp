@@ -44,3 +44,7 @@ Vector &Ball::GetVector() {
     return vector;
 }
 
+void Ball::SetVector(Vector vector) {
+    this->vector = vector;
+}
+

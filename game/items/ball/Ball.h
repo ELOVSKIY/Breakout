@@ -20,6 +20,8 @@ public:
 
     Vector &GetVector();
 
+    void SetVector(Vector vector);
+
 };
 
 

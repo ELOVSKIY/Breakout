@@ -39,7 +39,7 @@ public:
     }
 
     void ChangeHorizontalDirection() {
-        yVector.direction = -yVector.direction;
+        xVector.direction = -xVector.direction;
     }
 } Vector;
 

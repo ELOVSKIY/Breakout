@@ -39,16 +39,16 @@ public:
     void Click();
 
     float GetAvailableVectorPercent(const GameItem *gameItem,
-                                    Vector& vector);
+                                    Vector &vector);
 
-    float GetAvailableVectorPercent(const GameItem *gameItem,
-                                    Vector& vector,
-                                    const measure maxAvailableDistance);
+//    float GetAvailableVectorPercent(const GameItem *gameItem,
+//                                    Vector &vector,
+//                                    const measure maxAvailableDistance);
 
     measure GetMinGameItemMeasure();
 
     GameItem *GetNearestGameItem(const GameItem *gameItem,
-                                 Vector& vector,
+                                 Vector &vector,
                                  const measure xCenterPos,
                                  const measure yCenterPos) const;
 
