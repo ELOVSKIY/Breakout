@@ -1,11 +1,9 @@
-#include <thread>
 #include "Game.h"
 
-#define BRICK_ROW_COUNT 30
-#define BRICK_COLUMN_COUNT 30
+#define BRICK_ROW_COUNT 25
+#define BRICK_COLUMN_COUNT 25
 #define PLATE_SPEED 25
-#define BALL_SPEED 5
-#define ACCURACY = 0.01L
+#define BALL_SPEED 10
 
 void Game::Initialize() {
     this->active = true;
@@ -112,7 +110,12 @@ void Game::GetInput(HWND hWnd,
                               {0,  0}};
                     break;
                 case VK_SPACE:
-                    Initialize();
+                    if (!active) {
+                        Initialize();
+                    }
+                    break;
+                case VK_ESCAPE:
+                    SendMessageA(this->hWnd,WM_DESTROY, 0, 0);
                     break;
                 default:
                     vector = {{0, 0},
@@ -168,10 +171,10 @@ float Game::GetAvailableVectorPercent(const GameItem *gameItem,
         GameItem *nearestGameItem =
                 GetNearestGameItem(gameItem, vector, xPos + xOffset, yPos + yOffset);
         if (nearestGameItem != nullptr) {
-            const measure gameItemXPos = nearestGameItem->GetLeft() + gameItem->GetWidth() / 2 +
-                                         (gameItem->GetWidth() / 2 * (-vector.xVector.direction));
-            const measure gameItemYPos = nearestGameItem->GetTop() + gameItem->GetHeight() / 2 +
-                                         (gameItem->GetHeight() / 2 * (-vector.yVector.direction));
+            const measure gameItemXPos = nearestGameItem->GetLeft() + nearestGameItem->GetWidth() / 2 +
+                                         (nearestGameItem->GetWidth() / 2 * (-vector.xVector.direction));
+            const measure gameItemYPos = nearestGameItem->GetTop() + nearestGameItem->GetHeight() / 2 +
+                                         (nearestGameItem->GetHeight() / 2 * (-vector.yVector.direction));
             const measure xDiff = ABS(gameItemXPos - xPos);
             const measure yDiff = ABS(gameItemYPos - yPos);
             //есть баг думает что от угла отскакивает
@@ -240,16 +243,15 @@ float Game::GetAvailableVectorPercent(const GameItem *gameItem,
     }
 }
 
-//TODO разобраться с константами в функциях
-GameItem *Game::GetNearestGameItem(const GameItem *gameItem,
+GameItem *Game::GetNearestGameItem(const GameItem *movableGameItem,
                                    Vector &vector,
                                    const measure xCenterPos,
                                    const measure yCenterPos) const {
-    const measure gameItemHeight = gameItem->GetHeight();
-    const measure gameItemWidth = gameItem->GetWidth();
+    const measure gameItemHeight = movableGameItem->GetHeight();
+    const measure gameItemWidth = movableGameItem->GetWidth();
     const measure edgeXPos = xCenterPos + (gameItemWidth / 2) * vector.xVector.direction;
     const measure edgeYPos = yCenterPos + (gameItemHeight / 2) * vector.yVector.direction;
-    for (GameItem *gameItem : *gameItems) {
+    for (GameItem * const gameItem : *gameItems) {
         if ((edgeYPos > gameItem->GetTop()) && (edgeYPos < gameItem->GetBottom()) &&
             (edgeXPos > gameItem->GetLeft()) && (edgeXPos < gameItem->GetRight())) {
             return gameItem;
@@ -259,7 +261,7 @@ GameItem *Game::GetNearestGameItem(const GameItem *gameItem,
 }
 
 void Game::GameOver() {
-    this->active = false;
+//    this->active = false;
 }
 
 

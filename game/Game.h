@@ -47,7 +47,7 @@ public:
 
     measure GetMinGameItemMeasure();
 
-    GameItem *GetNearestGameItem(const GameItem *gameItem,
+    GameItem *GetNearestGameItem(const GameItem *movableGameItem,
                                  Vector &vector,
                                  const measure xCenterPos,
                                  const measure yCenterPos) const;

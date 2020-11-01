@@ -14,8 +14,6 @@ using namespace std;
 struct StateInfo {
     Game *game;
     int clientWidth, clientHeight;
-    int colCount, rowCount;
-    vector<vector<string>> content;
 };
 
 
@@ -24,10 +22,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow) {
 
     const wchar_t CLASS_NAME[] = L"Main Break Out Class";
-
-//    Gdiplus::GdiplusStartupInput gdiplusStartupInput;
-//    ULONG_PTR           gdiplusToken;
-//    GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
     WNDCLASS wc = {};
 
@@ -64,7 +58,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     ShowWindow(hwnd, SW_SHOWMAXIMIZED);
 
 
-//    SetTimer(hwnd, 1, 100, NULL);
+    SetTimer(hwnd, 1, 100, NULL);
     MSG msg = {};
     bool active = true;
     while (active) {
@@ -126,11 +120,7 @@ LRESULT CALLBACK WindowProc(
             return 0;
 
         case WM_PAINT: {
-
-
             pState->game->Draw(hWnd);
-
-
         }
             return 0;
 
